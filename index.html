@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html  lang="en" ng-app="myApp">
+<head>
+	<title>Flickr API Example</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <!--css files-->
+  <link rel="stylesheet" href="styles/dashboard.css"/>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/autocomplete.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body ng-controller="PhotoController">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Photo Gallery</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+           <div class="input-group">
+            <autocomplete ng-model="result" placeholder="Search for the photos" click-activation="true" data="movies" on-select="doSomethingElse" on-type="doSomething"></autocomplete>
+          </div>       
+        
+        </form>
+          </div>
+      </div>
+    </nav>
+
+ <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-3 sidebar">
+          <ul class="nav nav-sidebar capitalise">
+            <li ng-repeat="tagName in tags.tag"><a href="#">{{tagName._content}}</a></li>
+          </ul>
+        </div>
+        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
+          <div class="col-sm-12 col-lg-12">
+            <figure class="figure" ng-repeat="item in photos.photo">
+              <figcaption class="figure-caption">{{item.title}}</figcaption>
+                <img src="https://farm{{item.farm}}.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" class="img-rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+            </figure>
+        </div>
+      </div>
+    </div>
+  
+ <script src="scripts/app.js"></script>
+ <script src="scripts/autocomplete.js"></script>
+
+
+</body>
+</html>

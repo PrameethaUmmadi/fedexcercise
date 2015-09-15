@@ -1,0 +1,29 @@
+var MyApp = angular.module('MyApp', ['ng', 'ngResource']);
+
+MyApp.factory('flickrPhotos', function ($resource) {
+    return $resource('http://api.flickr.com/services/feeds/photos_public.gne', { format: 'json', jsoncallback: 'JSON_CALLBACK' }, { 'load': { 'method': 'JSONP' } });
+});
+
+MyApp.directive('masonry', function ($parse) {
+    return {
+        restrict: 'AC',
+        link: function (scope, elem, attrs) {
+            elem.masonry({ itemSelector: '.masonry-item', columnWidth: $parse(attrs.masonry)(scope) });
+        }
+    };        
+});
+
+MyApp.directive('masonryItem', function () {
+    return {
+        restrict: 'AC',
+        link: function (scope, elem, attrs) {
+            elem.imagesLoaded(function () {
+               elem.parents('.masonry').masonry('reload');
+            });
+        }
+    };        
+});
+
+MyApp.controller('MasonryCtrl', function ($scope, flickrPhotos) {
+    $scope.photos = flickrPhotos.load({ tags: 'dogs' });
+});
