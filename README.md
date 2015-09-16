@@ -1,9 +1,15 @@
 # fedexcercise
 Flicker photo fetcher
 
-# How  to run this app
+# How  to use this app
 
   Download and unzip sources. Launch Index.html on your favorite browser.
+
+# Functionalities provided 
+
+    -Search
+    -Tag based viewing
+    -Pagination
   
 # Tools and Technologies used
   HTML,CSS and Javascript
@@ -13,9 +19,9 @@ Flicker photo fetcher
   Sublime Text editor 
   
   
-Tested on all major browsers and their backword compatability. 
+Tested on all major browsers and their backward compatibility. 
 
-Note: Clicking on different tags displays same image becasue no other images are tagged. 
+Note: Clicking on different tags displays same image because no other images were tagged. 
 
 
 
