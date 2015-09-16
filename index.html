@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html  lang="en" ng-app="myApp">
 <head>
-	<title>Flickr API Example</title>
-	<meta charset="utf-8">
+	<title>FED exercise</title>
+	  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-  <!--css files-->
-  <link rel="stylesheet" href="styles/dashboard.css"/>
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="styles/autocomplete.css">
-
+	   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Optional theme -->
+	   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--css files-->
+      <link rel="stylesheet" href="styles/dashboard.css"/>
+      <link rel="stylesheet" href="styles/style.css">
+      <link rel="stylesheet" href="styles/autocomplete.css">
+    <!--library files-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body ng-controller="PhotoController">
+  <!--Navigation Header-->
   <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -34,34 +34,58 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
            <div class="input-group">
-            <autocomplete ng-model="result" placeholder="Search for the photos" click-activation="true" data="movies" on-select="doSomethingElse" on-type="doSomething"></autocomplete>
+            <autocomplete ng-model="result" placeholder="Search" click-activation="true" data="gallery" on-select="doSomethingElse" on-type="doSomething"></autocomplete>
           </div>       
         
         </form>
           </div>
       </div>
     </nav>
-
+  <!--end of Navigation Header-->
+  <!--Main content-->
  <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-3 sidebar">
+        <!--left panel-->
+        <div class="col-sm-3 col-md-2 sidebar">
+          <div class="nav nav-sidebar sidebar-header">Tags</div>
           <ul class="nav nav-sidebar capitalise">
-            <li ng-repeat="tagName in tags.tag"><a href="#">{{tagName._content}}</a></li>
+            <li ng-repeat="tagName in tags.tag" ng-click="getPhotos(tagName._content,$index)" ng-model="selectedTag" ng-class="{active: $index===selectedIndex}"><a href="#">{{tagName._content}}</a></li>
           </ul>
         </div>
-        <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
+        <!--end of left panel-->
+        <!--right panel-->
           <div class="col-sm-12 col-lg-12">
-            <figure class="figure" ng-repeat="item in photos.photo">
-              <figcaption class="figure-caption">{{item.title}}</figcaption>
-                <img src="https://farm{{item.farm}}.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" class="img-rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-            </figure>
-        </div>
+                <div ng-include="html"></div>
+          </div>
+          <!--end of right panel-->
       </div>
+      <!--Pagination directive-->
+      <div class="row">
+        <dir-pagination-controls max-size="2" direction-links="true" boundary-links="true">
+        </dir-pagination-controls>
     </div>
-  
+    <!--end of Pagination directive-->
+    </div>
+    <!--end of Main content-->
+  <!--Javascript files-->
  <script src="scripts/app.js"></script>
- <script src="scripts/autocomplete.js"></script>
+ <script src="scripts/directives/autocomplete.js"></script>
+ <script src="scripts/directives/dirPagination.js"></script>
+ <!--end of Javascript files-->
+ <!--content of right panel-->
+ <script type="text/ng-template" id="photos.html">
+   <figure class="figure" dir-paginate="item in photos.photo | itemsPerPage : 3">
+      <img src="https://farm{{item.farm}}.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" class="img-rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+        <figcaption class="figure-caption">{{item.title}}</figcaption>
 
-
+   </figure>        
+ </script>
+<script type="text/ng-template" id="tagResult.html">
+   <figure class="figure" dir-paginate="item in photos.photo | itemsPerPage : 3">
+          <img src="https://farm{{item.farm}}.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" class="img-rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+            <figcaption class="figure-caption">{{item.title}}</figcaption>
+   </figure>        
+ </script>
+ <!--end of content of right panel-->
 </body>
 </html>

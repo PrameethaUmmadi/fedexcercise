@@ -107,12 +107,28 @@ body {
 
 
 img {
-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
     width: 504px;
     height: 378px;
 }
+.figure{
+  margin-top:12px;
+  margin-bottom:15px;
+}
 
-figcaption.figure-caption , .capitalise{
+figcaption.figure-caption{
       text-transform: capitalize;
       font-weight:bold;
+}
+.capitalise {
+        text-transform: capitalize;
+
+}
+.sidebar-header{
+  background-color : #2b7;
+  border-color:#2b7;
+  color:#fff;
+  font-weight:bold;
+  line-height:40px;
+  margin-bottom:0;
 }
