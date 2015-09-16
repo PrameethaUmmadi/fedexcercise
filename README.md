@@ -12,11 +12,11 @@ Flicker photo fetcher
     -Pagination
   
 # Tools and Technologies used
-  HTML,CSS and Javascript
+    HTML,CSS and Javascript
   
-  JQuery, Bootstrap and AngularJS
+    JQuery, Bootstrap and AngularJS
   
-  Sublime Text editor 
+    Sublime Text editor 
   
   
 Tested on all major browsers and their backward compatibility. 
