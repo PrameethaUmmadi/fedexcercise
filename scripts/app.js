@@ -6,7 +6,7 @@ myApp.controller('PhotoController',[ '$scope','$http', function PhotoController(
     $scope.html = "photos.html";
     $scope.gallery = []
     $scope.pics = [];
-    $scope.selectedIndex = "";
+    $scope.selectedIndex = -1;
     //url to fetch tags of a user
    var url = "https://api.flickr.com/services/rest/?method=flickr.tags.getListUser&api_key=a5e95177da353f58113fd60296e1d250&user_id=132365033@N08&format=json&jsoncallback=getTags";
    //url to fetch all the photos uploaded by a user
@@ -35,6 +35,8 @@ myApp.controller('PhotoController',[ '$scope','$http', function PhotoController(
         $scope.photos.photo = $scope.photos.photo.filter(function(item) {
            return item.title === searchString;
        });
+         $scope.selectedIndex = -1;
+
   }
   $scope.getPhotos = function(selectedTag,i){
     $scope.selectedIndex = i;
@@ -46,6 +48,11 @@ myApp.controller('PhotoController',[ '$scope','$http', function PhotoController(
     }
     $scope.html = "tagResult.html";
    document.getElementsByName("searchBox")[0].value = '';
+}
+$scope.clickOnHeader = function(){
+          $scope.photos.photo = $scope.pics;
+          document.getElementsByName("searchBox")[0].value = '';
+          $scope.selectedIndex = -1;
 }
 
 }]);
