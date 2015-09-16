@@ -15,7 +15,7 @@ Flicker photo fetcher
   
 Tested on all major browsers and their backword compatability. 
 
-Note: Clicking on different tags displays same image becasue there no other images tagged. 
+Note: Clicking on different tags displays same image becasue no other images are tagged. 
 
 
 
